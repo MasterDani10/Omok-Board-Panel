@@ -7,10 +7,17 @@ import java.awt.event.MouseEvent;
 
 public class Omok {
     public Omok(){
+        Image imagePlay = Toolkit.getDefaultToolkit().getImage("Resources/play.png").
+                getScaledInstance(20, 20, 20);
+        Image imageAbout = Toolkit.getDefaultToolkit().getImage("Resources/about.png").
+                getScaledInstance(20, 20, 20);
+        ImageIcon iconPlay = new ImageIcon(imagePlay);
+        ImageIcon iconAbout = new ImageIcon(imageAbout);
+
         // Frame
         JFrame frame = new JFrame("Omok");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(470,500);
+        frame.setSize(470,600);
 
         // Menu Bar
         JMenuBar menuBar = new JMenuBar();
@@ -21,26 +28,44 @@ public class Omok {
 
         // Menu Item
         JMenuItem menuItemPlay = new JMenuItem("Play", KeyEvent.VK_P);
-        ImageIcon playIcon = new ImageIcon("PlayIcon.png");
-        menuItemPlay.setIcon(playIcon);
+        menuItemPlay.setIcon(iconPlay);
         menuItemPlay.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
         menuItemPlay.getAccessibleContext().setAccessibleDescription(
                 "Play game");
         //menuItemPlay.addActionListener(…);
         menu.add(menuItemPlay);
+
+
+        JMenuItem menuItemAbout = new JMenuItem("About", KeyEvent.VK_A);
+        menuItemAbout.setIcon(iconAbout);
+        menuItemAbout.setAccelerator(KeyStroke.getKeyStroke(
+                KeyEvent.VK_A, InputEvent.ALT_DOWN_MASK));
+        menuItemAbout.getAccessibleContext().setAccessibleDescription(
+                "Omok Game Info");
+        //menuItemAbout.addActionListener(…);
+        menu.add(menuItemAbout);
+
+
         frame.setJMenuBar(menuBar);
 
-        JMenuItem about = new JMenuItem("About", KeyEvent.VK_A);
-
-
-
         JToolBar toolBar = new JToolBar("Omok");
-        JButton button = new JButton("Play");
-        //button.addActionListener(…);
-        button.setToolTipText("Play a new game");
-        button.setFocusPainted(false);
-        toolBar.add(button);
+        JButton playTool = new JButton();
+        playTool.setIcon(iconPlay);
+        //playTool.addActionListener(…);
+        playTool.setToolTipText("Play a new game");
+        playTool.setFocusPainted(false);
+        toolBar.add(playTool);
+
+
+        JButton aboutTool = new JButton();
+        aboutTool.setIcon(iconAbout);
+        //aboutTool.addActionListener(…);
+        aboutTool.setToolTipText("Omok Game Info");
+        aboutTool.setFocusPainted(false);
+        toolBar.add(aboutTool);
+        
+        //playTool.
         frame.add(toolBar, BorderLayout.NORTH);
 
         //panel.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -70,14 +95,32 @@ public class Omok {
             public void mouseClicked(MouseEvent e) {
                 System.out.println(d.getMousePosition());
                 Point p = d.getMousePosition();
-                double x = p.getX()*10;
-                double y = p.getY()*10;
-                x = Math.round(x);
-                x = x/10;
-                y = Math.round(y);
-                y = y/10;
+                double x = p.getX();
+//                if(x >= 0 && x < 25){
+//                    x = 10;
+//                }
+                for(int i = 10; i <= 300; i += 30){
+//                    if(x < 10){
+//                        x = 10;
+//                    }
+//                    else{
+//                        if(x > i && x < i+15){
+//                            x = i;
+//                        }
+//                    }
+//                    if(x < (i+15) || x > i-15){
+//                        x = i;
+//                    }
+
+                }
                 System.out.println(x);
-                System.out.println(y);
+                double y = p.getY();
+//                x = Math.round(x);
+//                x = x/10;
+//                y = Math.round(y);
+//                y = y/10;
+//                System.out.println(x);
+//                System.out.println(y);
             }
         });
 
