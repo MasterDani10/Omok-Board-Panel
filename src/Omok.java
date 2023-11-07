@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Omok {
@@ -14,6 +11,7 @@ public class Omok {
     ArrayList<Point> player2Stones = new ArrayList<>();
     BoardPanel d = new BoardPanel(new Board(), player1Stones,player2Stones);
     Boolean p1 = true;
+    private boolean gameStarted = false;
 
     int x = 0;
     int y = 0;
@@ -43,11 +41,11 @@ public class Omok {
         // Menu Item
         JMenuItem menuItemPlay = new JMenuItem("Play", KeyEvent.VK_P);
         menuItemPlay.setIcon(iconPlay);
+
         menuItemPlay.setAccelerator(KeyStroke.getKeyStroke(
                 KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
         menuItemPlay.getAccessibleContext().setAccessibleDescription(
                 "Play game");
-        //menuItemPlay.addActionListener(…);
         menu.add(menuItemPlay);
 
 
@@ -77,8 +75,14 @@ public class Omok {
         //aboutTool.addActionListener(…);
         aboutTool.setToolTipText("Omok Game Info");
         aboutTool.setFocusPainted(false);
+        aboutTool.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(frame, "Welcome to Omok!");
+            }
+        });
         toolBar.add(aboutTool);
-        
+
         //playTool.
         frame.add(toolBar, BorderLayout.NORTH);
 
@@ -90,20 +94,36 @@ public class Omok {
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
         panel.setLayout(new BorderLayout());
-        JButton p = new JButton("Play");
-        panel2.add(p);
         panel2.add(new JLabel("            Opponent:"));
         String[] opponents = {"Human", "Computer"};
         JComboBox comboBox = new JComboBox(opponents);
         panel2.add(comboBox);
         //panel2.add(new JLabel("ii        jhlkk                            "));
-        JLabel player = new JLabel("Player 1 Turn");
+        JLabel player = new JLabel();
         panel3.add(player);
         panel.add(panel2, BorderLayout.NORTH);
         panel.add(panel3);
         center.add(panel, BorderLayout.NORTH);
+        JButton p = new JButton("Play");
+        p.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!gameStarted) {
+                    gameStarted = true;
+                    player.setText("Player 1 turn");
+                }
+            }
+        });
+        panel2.add(p);
+        d.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if(!gameStarted){
+                    JOptionPane.showMessageDialog(frame, "Please click the Play button");
 
-
+                }
+            }
+        });
 
         // Menu Tool Bar
 
