@@ -51,7 +51,12 @@ public class Omok {
                 KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
         menuItemPlay.getAccessibleContext().setAccessibleDescription(
                 "Play game");
-        //menuItemPlay.addActionListener(…);
+        menuItemPlay.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                playButtonClicked(frame);
+            }
+        });
         menu.add(menuItemPlay);
 
 
@@ -61,7 +66,12 @@ public class Omok {
                 KeyEvent.VK_A, InputEvent.ALT_DOWN_MASK));
         menuItemAbout.getAccessibleContext().setAccessibleDescription(
                 "Omok Game Info");
-        //menuItemAbout.addActionListener(…);
+        menuItemAbout.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                aboutButtonClicked(frame);
+            }
+        });
         menu.add(menuItemAbout);
 
 
@@ -70,7 +80,12 @@ public class Omok {
         JToolBar toolBar = new JToolBar("Omok");
         JButton playTool = new JButton();
         playTool.setIcon(iconPlay);
-        //playTool.addActionListener(…);
+        playTool.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                playButtonClicked(frame);
+            }
+        });
         playTool.setToolTipText("Play a new game");
         playTool.setFocusPainted(false);
         toolBar.add(playTool);
@@ -78,7 +93,12 @@ public class Omok {
 
         JButton aboutTool = new JButton();
         aboutTool.setIcon(iconAbout);
-        //aboutTool.addActionListener(…);
+        aboutTool.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                aboutButtonClicked(frame);
+            }
+        });
         aboutTool.setToolTipText("Omok Game Info");
         aboutTool.setFocusPainted(false);
         toolBar.add(aboutTool);
@@ -98,15 +118,7 @@ public class Omok {
         p.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                int result = JOptionPane.showConfirmDialog(frame,"Do you want to start a new game?",
-                        "Omok",JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION){
-
-                    System.out.println("Correct");
-                    frame.setVisible(false);
-                    frame.dispose();
-                    new Omok();
-                }
+                playButtonClicked(frame);
             }
         });
 
@@ -224,8 +236,38 @@ public class Omok {
             }
 
         }
+    }
 
+    private void clean(){
+        board = null;
+        player1 = null;
+        player2 = null;
+        player1Stones = null;
+        player2Stones = null;
+        d = null;
+        p1 = null;
+        point = null;
+    }
 
+    private void playButtonClicked(JFrame frame){
+        int result = JOptionPane.showConfirmDialog(frame,"Do you want to start a new game?",
+                "Omok",JOptionPane.YES_NO_OPTION);
+        if (result == JOptionPane.YES_OPTION){
+            frame.setVisible(false);
+            frame.dispose();
+            clean();
+            new Omok();
+        }
+    }
+
+    private void aboutButtonClicked(JFrame frame){
+        JPanel about = new JPanel(new GridLayout(0,1,5,5));
+        about.add(new JLabel("Authors:"));
+        about.add(new JLabel("Luis Daniel Estrada Aguirre"));
+        about.add(new JLabel("Benjamin Laffita"));
+        about.add(new JLabel(""));
+        about.add(new JLabel("Version: 1.0"));
+        JOptionPane.showMessageDialog(frame,about,"About",JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static void main(String[] args){
