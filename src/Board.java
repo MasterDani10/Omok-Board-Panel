@@ -228,7 +228,7 @@ public class Board {
      * @return Returns an ArrayList of Object Place, where each Place contains
      * the x and y coordinates of a winning stone.
      */
-    public Iterable<Place> winningRow(Player player) {
+    public ArrayList<Place> winningRow(Player player) {
         int playerNum;
         if (player1.name().equals(player.name())) {//checking if player 1 or 2
             playerNum = 1;
