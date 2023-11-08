@@ -174,7 +174,7 @@ public class Board {
      */
     public boolean isWonBy(Player player) {
         int p;
-        if (player1.name().equals(player.name())) {
+        if(player.name().equals("Player1")) {
             p = 1;
         }
         else{
@@ -260,6 +260,110 @@ public class Board {
             }
         }
         return new ArrayList<>();// if not returns an empty list
+    }
+
+    public int getRoundedX(int x){
+        if(x < 25){
+            x = 10;
+        }
+        else if (x < 55) {
+            x = 40;
+        }
+        else if (x < 85) {
+            x = 70;
+        }
+        else if (x < 115) {
+            x = 100;
+        }
+        else if (x < 145) {
+            x = 130;
+        }
+        else if (x < 175) {
+            x = 160;
+        }
+        else if (x < 205) {
+            x = 190;
+        }
+        else if (x < 235) {
+            x = 220;
+        }
+        else if (x < 265) {
+            x = 250;
+        }
+        else if (x < 295) {
+            x = 280;
+        }
+        else if (x < 325) {
+            x = 310;
+        }
+        else if (x < 355) {
+            x = 340;
+        }
+        else if (x < 385) {
+            x = 370;
+        }
+        else if (x < 415) {
+            x = 400;
+        }
+        else if (x < 445) {
+            x = 430;
+        }
+        else if (x < 475) {
+            x = 460;
+        }
+        return x;
+    }
+
+    public int getRoundedY(int y){
+        if(y < 25){
+            y = 10;
+        }
+        else if (y < 55) {
+            y = 40;
+        }
+        else if (y < 85) {
+            y = 70;
+        }
+        else if (y < 115) {
+            y = 100;
+        }
+        else if (y < 145) {
+            y = 130;
+        }
+        else if (y < 175) {
+            y = 160;
+        }
+        else if (y < 205) {
+            y = 190;
+        }
+        else if (y < 235) {
+            y = 220;
+        }
+        else if (y < 265) {
+            y = 250;
+        }
+        else if (y < 295) {
+            y = 280;
+        }
+        else if (y < 325) {
+            y = 310;
+        }
+        else if (y < 355) {
+            y = 340;
+        }
+        else if (y < 385) {
+            y = 370;
+        }
+        else if (y < 415) {
+            y = 400;
+        }
+        else if (y < 445) {
+            y = 430;
+        }
+        else if (y < 475) {
+            y = 460;
+        }
+        return  y;
     }
 
 }

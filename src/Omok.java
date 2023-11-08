@@ -12,8 +12,11 @@ public class Omok {
     Player player2 = new Player("Player2");
     ArrayList<Point> player1Stones = new ArrayList<>();
     ArrayList<Point> player2Stones = new ArrayList<>();
+    //Boolean win = false;
     BoardPanel d = new BoardPanel(new Board(), player1Stones,player2Stones);
     Boolean p1 = true;
+
+
 
     int x = 0;
     int y = 0;
@@ -78,7 +81,7 @@ public class Omok {
         aboutTool.setToolTipText("Omok Game Info");
         aboutTool.setFocusPainted(false);
         toolBar.add(aboutTool);
-        
+
         //playTool.
         frame.add(toolBar, BorderLayout.NORTH);
 
@@ -124,103 +127,9 @@ public class Omok {
                 x = (int)point.getX();
                 y = (int)point.getY();
 
-                if(x < 25){
-                    x = 10;
-                }
-                else if (x < 55) {
-                    x = 40;
-                }
-                else if (x < 85) {
-                    x = 70;
-                }
-                else if (x < 115) {
-                    x = 100;
-                }
-                else if (x < 145) {
-                    x = 130;
-                }
-                else if (x < 175) {
-                    x = 160;
-                }
-                else if (x < 205) {
-                    x = 190;
-                }
-                else if (x < 235) {
-                    x = 220;
-                }
-                else if (x < 265) {
-                    x = 250;
-                }
-                else if (x < 295) {
-                    x = 280;
-                }
-                else if (x < 325) {
-                    x = 310;
-                }
-                else if (x < 355) {
-                    x = 340;
-                }
-                else if (x < 385) {
-                    x = 370;
-                }
-                else if (x < 415) {
-                    x = 400;
-                }
-                else if (x < 445) {
-                    x = 430;
-                }
-                else if (x < 475) {
-                    x = 460;
-                }
+                x = board.getRoundedX(x);
+                y = board.getRoundedY(y);
 
-                if(y < 25){
-                    y = 10;
-                }
-                else if (y < 55) {
-                    y = 40;
-                }
-                else if (y < 85) {
-                    y = 70;
-                }
-                else if (y < 115) {
-                    y = 100;
-                }
-                else if (y < 145) {
-                    y = 130;
-                }
-                else if (y < 175) {
-                    y = 160;
-                }
-                else if (y < 205) {
-                    y = 190;
-                }
-                else if (y < 235) {
-                    y = 220;
-                }
-                else if (y < 265) {
-                    y = 250;
-                }
-                else if (y < 295) {
-                    y = 280;
-                }
-                else if (y < 325) {
-                    y = 310;
-                }
-                else if (y < 355) {
-                    y = 340;
-                }
-                else if (y < 385) {
-                    y = 370;
-                }
-                else if (y < 415) {
-                    y = 400;
-                }
-                else if (y < 445) {
-                    y = 430;
-                }
-                else if (y < 475) {
-                    y = 460;
-                }
                 point = new Point(x,y);
 
                 x = (x-10) / 30;
@@ -237,11 +146,28 @@ public class Omok {
                 System.out.println(x);
                 System.out.println(y);
                 p1 = !p1;
-                if(p1){
-                    player.setText("Player 1 Turn");
+                if(!p1){
+                    player.setText("Player 2 Turn");
+                    board.selectPlayerOne(player1);
+                    board.placeStone((int)x,(int)y,player1);
+                    if(board.isWonBy(player1)){
+                        JOptionPane.showMessageDialog(frame, "Player 1 Won!!!",
+                                "Omok", JOptionPane.PLAIN_MESSAGE);
+                        //win = true;
+                    }
+                    System.out.println(board.isWonBy(player1));
+
                 }
                 else{
-                    player.setText("Player 2 Turn");
+                    player.setText("Player 1 Turn");
+                    board.selectPlayerOne(player1);
+                    board.placeStone((int)x,(int)y,player2);
+                    if(board.isWonBy(player2)){
+                        JOptionPane.showMessageDialog(frame, "Player 2 Won!!!",
+                                "Omok", JOptionPane.PLAIN_MESSAGE);
+                        //win = true;
+                    }
+                    System.out.println(board.isWonBy(player2));
                 }
             }
         });
