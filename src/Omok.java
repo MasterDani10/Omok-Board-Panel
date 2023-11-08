@@ -51,11 +51,8 @@ public class Omok {
                 KeyEvent.VK_P, InputEvent.ALT_DOWN_MASK));
         menuItemPlay.getAccessibleContext().setAccessibleDescription(
                 "Play game");
-        menuItemPlay.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                playButtonClicked(frame);
-            }
+        menuItemPlay.addActionListener(e -> {
+            playButtonClicked(frame);
         });
         menu.add(menuItemPlay);
 
@@ -66,11 +63,8 @@ public class Omok {
                 KeyEvent.VK_A, InputEvent.ALT_DOWN_MASK));
         menuItemAbout.getAccessibleContext().setAccessibleDescription(
                 "Omok Game Info");
-        menuItemAbout.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                aboutButtonClicked(frame);
-            }
+        menuItemAbout.addActionListener(e -> {
+            aboutButtonClicked(frame);
         });
         menu.add(menuItemAbout);
 
@@ -80,24 +74,17 @@ public class Omok {
         JToolBar toolBar = new JToolBar("Omok");
         JButton playTool = new JButton();
         playTool.setIcon(iconPlay);
-        playTool.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                playButtonClicked(frame);
-            }
+        playTool.addActionListener(e -> {
+            playButtonClicked(frame);
         });
         playTool.setToolTipText("Play a new game");
         playTool.setFocusPainted(false);
         toolBar.add(playTool);
 
-
         JButton aboutTool = new JButton();
         aboutTool.setIcon(iconAbout);
-        aboutTool.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                aboutButtonClicked(frame);
-            }
+        aboutTool.addActionListener(e -> {
+            aboutButtonClicked(frame);
         });
         aboutTool.setToolTipText("Omok Game Info");
         aboutTool.setFocusPainted(false);
@@ -106,7 +93,6 @@ public class Omok {
         //playTool.
         frame.add(toolBar, BorderLayout.NORTH);
 
-        //panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         JPanel center = new JPanel();
         center.setLayout(new BorderLayout());
 
@@ -115,11 +101,8 @@ public class Omok {
         JPanel panel3 = new JPanel();
         panel.setLayout(new BorderLayout());
         JButton p = new JButton("Play");
-        p.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                playButtonClicked(frame);
-            }
+        p.addActionListener(e -> {
+            playButtonClicked(frame);
         });
 
         panel2.add(p);
