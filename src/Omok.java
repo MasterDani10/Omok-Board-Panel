@@ -16,6 +16,7 @@ public class Omok {
     BoardPanel d = new BoardPanel(new Board(), player1Stones,player2Stones);
     Boolean p1 = true;
     Boolean restart = false;
+    Boolean repeat = true;
 
 
 
@@ -131,19 +132,47 @@ public class Omok {
         d.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                repeat = true;
                 System.out.println(d.getMousePosition());
                 point = d.getMousePosition();
+                while(repeat){
 
-                x = (int)point.getX();
-                y = (int)point.getY();
+                    x = (int)point.getX();
+                    y = (int)point.getY();
 
-                x = board.getRoundedX(x);
-                y = board.getRoundedY(y);
+                    x = board.getRoundedX(x);
+                    y = board.getRoundedY(y);
 
-                point = new Point(x,y);
+                    point = new Point(x,y);
 
-                x = (x-10) / 30;
-                y = (y-10) / 30;
+                    x = (x-10) / 30;
+                    y = (y-10) / 30;
+
+                    if(p1){
+                        if(board.isOccupied(x,y)){
+                            player.setText("Player 1 Turn (Please Select an Empty Space!!!)");
+                            JOptionPane.showMessageDialog(frame,
+                                    "Player 1, Please Select an Empty Space!!!!",
+                                    "Omok", JOptionPane.PLAIN_MESSAGE);
+                            point = d.getMousePosition();
+                        }
+                        else {
+                            repeat = false;
+                        }
+                    }
+                    else {
+                        if(board.isOccupied(x,y)){
+                            player.setText("Player 2 Turn (Please Select an Empty Space!!!)");
+                            JOptionPane.showMessageDialog(frame,
+                                    "Player 2, Please Select an Empty Space!!!!",
+                                    "Omok", JOptionPane.PLAIN_MESSAGE);
+                            point = d.getMousePosition();
+                        }
+                        else {
+                            repeat = false;
+                        }
+                    }
+                }
 
                 if(!p1){
                     player2Stones.add(point);
@@ -163,14 +192,10 @@ public class Omok {
                         d = new BoardPanel(board,player1Stones,player2Stones,board.winningRow(player1),1);
                         JOptionPane.showMessageDialog(frame, "Player 1 Won!!!",
                                 "Omok", JOptionPane.PLAIN_MESSAGE);
-                        //win = true;
                         player.setText("Player 1 Won!!!");
-
-
                     }
                     else {
                         player.setText("Player 2 Turn");
-
                     }
                 }
                 else{
@@ -187,6 +212,11 @@ public class Omok {
                         player.setText("Player 1 Turn");
 
                     }
+                }
+                if (board.isFull()){
+                    d = new BoardPanel(board,player1Stones,player2Stones,board.winningRow(player1),1);
+                    JOptionPane.showMessageDialog(frame, "The Game is a Draw",
+                            "Omok", JOptionPane.PLAIN_MESSAGE);
                 }
             }
         });
