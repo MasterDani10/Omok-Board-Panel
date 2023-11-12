@@ -228,7 +228,7 @@ public class Board {
      * @return Returns an ArrayList of Object Place, where each Place contains
      * the x and y coordinates of a winning stone.
      */
-    public ArrayList<Place> winningRow(Player player) {
+    public ArrayList<Point> winningRow(Player player) {
         int playerNum;
         if (player1.name().equals(player.name())) {//checking if player 1 or 2
             playerNum = 1;
@@ -243,7 +243,7 @@ public class Board {
                     continue;
                 }
                 for(int dir = 0; dir < directions.length; dir++){
-                    ArrayList<Place> row = new ArrayList<>();//stores position of stones
+                    ArrayList<Point> row = new ArrayList<>();//stores position of stones
                     for(int count = 0; count < 5; count++){//checking for five in a row
                         int x = i + directions[dir][0] * count;
                         int y = j + directions[dir][1] * count;
@@ -251,7 +251,7 @@ public class Board {
                             row.clear();
                             break;
                         }
-                        row.add(new Place(y, x));//if coordinates of stone are the players then coordinates are stored
+                        row.add(new Point(y, x));//if coordinates of stone are the players then coordinates are stored
                     }
                     if(row.size() == 5){// if 5 coordinates are stored in the row returns the winning row
                         return row;
@@ -261,6 +261,8 @@ public class Board {
         }
         return new ArrayList<>();// if not returns an empty list
     }
+
+
 
     public int getRoundedX(int x){
         if(x < 25){
