@@ -25,6 +25,8 @@ public class Omok {
     int y = 0;
     int xCom = 0;
     int yCom = 0;
+    int xComScaled = 0;
+    int yComScaled = 0;
     Point point = new Point(0,0);
     Point pointCom = new Point(0,0);
     Boolean human;
@@ -265,16 +267,13 @@ public class Omok {
                             repeatCom = false;
                         }
                     }
-                    xCom = (xCom*30)+10;
-                    yCom = (yCom*30)+10;
-                    pointCom = new Point(xCom,yCom);
+                    xComScaled = (xCom*30)+10;
+                    yComScaled = (yCom*30)+10;
+                    pointCom = new Point(xComScaled,yComScaled);
                     player2Stones.add(pointCom);
 
 
                     player1Stones.add(point);
-
-
-
                     System.out.println(x);
                     System.out.println(y);
 
@@ -294,6 +293,7 @@ public class Omok {
                     }
 
                     board.selectPlayerOne(player1);
+                    //board.selectPlayerTwo(player2);
                     board.placeStone((int)xCom,(int)yCom,player2);
                     if(board.isWonBy(player2)){
                         BoardPanel winning = new BoardPanel(board,player1Stones,player2Stones,board.winningRow(player2));
@@ -342,10 +342,10 @@ public class Omok {
             frame.dispose();
             clean();
             if(mode.equals("Computer")){
-                new Omok2(false);
+                new Omok(false);
             }
             else if(mode.equals("Human")){
-                new Omok2(true);
+                new Omok(true);
             }
 
         }

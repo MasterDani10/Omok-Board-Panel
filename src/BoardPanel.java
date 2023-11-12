@@ -56,10 +56,12 @@ public class BoardPanel extends JPanel {
         }
 
         if(board.isWonBy(player1) || board.isWonBy(player2)){
-            //winningRow = board.winningRow(player1);
+
             for (int i = 0; i < winningRow.size(); i++){
-                g.setColor(Color.RED);
-                g.drawOval((int)winningRow.get(i).getX()*30, (int)winningRow.get(i).getY()*30, 20,20);
+                for (int j = 1; j < 3; j++) {
+                    g.setColor(Color.RED);
+                    g.drawOval((int) winningRow.get(i).getX() * 30, (int) winningRow.get(i).getY() * 30, 20-j, 20-j);
+                }
             }
         }
         repaint();
