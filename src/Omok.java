@@ -362,7 +362,4 @@ public class Omok {
         JOptionPane.showMessageDialog(frame,about,"About",JOptionPane.INFORMATION_MESSAGE);
     }
 
-//    public static void main(String[] args){
-//        Omok omok = new Omok(1);
-//    }
 }
