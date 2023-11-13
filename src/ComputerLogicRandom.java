@@ -6,7 +6,7 @@ public class ComputerLogicRandom {
         random = new Random();
     }
     public int getRandom(){
-        return random.nextInt(5)+1;
+        return random.nextInt(14)+1;
     }
 
     public int getScaled(int x){
