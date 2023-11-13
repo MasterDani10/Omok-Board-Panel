@@ -56,25 +56,22 @@ public class BoardPanel extends JPanel {
         }
 
         if(board.isWonBy(player1) || board.isWonBy(player2)){
-
+            if(board.isWonBy(player1)){
+                g.setColor(Color.RED);
+            }
+            else {
+                g.setColor(Color.GREEN);
+            }
             for (int i = 0; i < winningRow.size(); i++){
                 for (int j = 1; j < 3; j++) {
-                    g.setColor(Color.RED);
                     g.drawOval((int) winningRow.get(i).getX() * 30, (int) winningRow.get(i).getY() * 30, 20-j, 20-j);
                 }
             }
         }
         repaint();
     }
-
-
-
-
     @Override
     public Dimension getPreferredSize(){
         return new Dimension(width,size);
     }
-
-
-
 }
