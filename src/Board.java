@@ -1,54 +1,30 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Abstraction of an Omok board, which consists of n x n intersections
- * or places where players can place their stones. The board can be
- * accessed using a pair of 0-based indices (x, y), where x and y
- * denote the column and row number, respectively. The top-left
- * intersection is represented by the indices (0, 0), and the
- * bottom-right intersection is represented by the indices (n-1, n-1).
- *
- * @author Luis Daniel Estrada Aguirre and Benjamin Laffita
- * @version 1.0
- */
 public class Board {
-    // 2D array that represents the game board
     protected int[][] board;
-    // Player assigned to be Player 1 in the game
     Player player1;
-    // Player assigned to be Player 2 in the game
     Player player2;
-    //Size of the 2D array board, meaning that the board is a (side * side) 2D array.
     int size;
 
-    /** Create a new board of the default size. */
     public Board() {
         size = 15;
         this.board = new int[size][size];
     }
 
-    /** Create a new board of the specified size. */
     public Board(int size) {
         this.size = size;
         this.board = new int[size][size];
     }
 
-    /** Return the size of this board. */
     public int size() {
         return size;
     }
 
-    /** Removes all the stones placed on the board, effectively
-     * resetting the board to its original state.
-     */
     public void clear() {
         board = new int[size][size];
     }
 
-    /** Return a boolean value indicating whether all the places
-     * on the board are occupied or not.
-     */
     public boolean isFull() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
@@ -60,31 +36,14 @@ public class Board {
         return true;
     }
 
-
-    /**Registers given Player as Player 1
-     *
-     * @param player Player who is going to be designated as Player 1
-     */
     public void selectPlayerOne(Player player){
         player1 = new Player(player.name());
     }
 
-    /**Registers given Player as Player 2
-     *
-     * @param player Player who is going to be designated as Player 2
-     */
     public void selectPlayerTwo(Player player){
         player2 = new Player(player.name());
     }
 
-    /**
-     * Place a stone for the specified player at a specified
-     * intersection (x, y) on the board.
-     *
-     * @param x 0-based column (vertical) index
-     * @param y 0-based row (horizontal) index
-     * @param player Player whose stone is to be placed
-     */
     public void placeStone(int x, int y, Player player) {
         if(player1.name().equals(player.name())){
             board[y][x] = 1;
@@ -94,13 +53,6 @@ public class Board {
         }
     }
 
-    /**
-     * Return a boolean value indicating whether the specified
-     * intersection (x, y) on the board is empty or not.
-     *
-     * @param x 0-based column (vertical) index
-     * @param y 0-based row (horizontal) index
-     */
     public boolean isEmpty(int x, int y) {
         if(board[y][x] == 0){
             return true;
@@ -108,14 +60,6 @@ public class Board {
         return false;
     }
 
-    /**
-     * Return a boolean value indicating whether the specified
-     * intersection (x, y) on the board is occupied or not.
-     *
-     *
-     * @param x 0-based column (vertical) index
-     * @param y 0-based row (horizontal) index
-     */
     public boolean isOccupied(int x, int y) {
         if(board[y][x] == 0){
             return false;
@@ -123,14 +67,6 @@ public class Board {
         return true;
     }
 
-    /**
-     * Return a boolean value indicating whether the specified
-     * intersection (x, y) on the board is occupied by the given
-     * player or not.
-     *
-     * @param x 0-based column (vertical) index
-     * @param y 0-based row (horizontal) index
-     */
     public boolean isOccupiedBy(int x, int y, Player player) {
         if(player1.name().equals(player.name())){
             if(board[y][x] == 1){
@@ -145,13 +81,6 @@ public class Board {
         return false;
     }
 
-    /**
-     * Return the player who occupies the specified intersection (x, y)
-     * on the board. If the place is empty, this method returns null.
-     *
-     * @param x 0-based column (vertical) index
-     * @param y 0-based row (horizontal) index
-     */
     public Player playerAt(int x, int y) {
         if(board[y][x] == 1){
             return player1;
@@ -164,14 +93,6 @@ public class Board {
         }
     }
 
-    /**
-     * Return a boolean value indicating whether the given player
-     * has a winning row on the board. A winning row is a consecutive
-     * sequence of five or more stones placed by the same player in
-     * a horizontal, vertical, or diagonal direction.
-     *
-     * @param player Given player which method will check if it has won
-     */
     public boolean isWonBy(Player player) {
         int p;
         if(player.name().equals("Player1")) {
@@ -195,20 +116,6 @@ public class Board {
     }
 
 
-    /**
-     * Checks for the winning sequence in the direction of the specified starting point (x, y).
-     * This method determines if there is a consecutive sequence of five stones in a row of the
-     * same player starting current position (x, y) and checking different directions (dx, dy).
-     *
-     * @param board The 2D array represents the game board. Each entry should be 0 (empty),
-     *              1 representing Player 1, or 2 representing player 2
-     * @param x The starting x-coordinate representing the columns on the board
-     * @param y The starting y-coordinate representing the rows on the board
-     * @param dx Checks the x-direction
-     * @param dy Checks the y-direction
-     * @return Returns true if there is a winning sequence in the specified direction
-     *         starting from the position (x, y). Otherwise, returns false.
-     */
     public boolean checkDirection(int x, int y, int dx, int dy) {
         int n = board.length;
         int player = board[x][y];
@@ -223,11 +130,6 @@ public class Board {
         return true;
     }
 
-    /** Return the winning sequence of stones.
-     * @param player Player which the winning row belongs to.
-     * @return Returns an ArrayList of Object Place, where each Place contains
-     * the x and y coordinates of a winning stone.
-     */
     public ArrayList<Point> winningRow(Player player) {
         int playerNum;
         if (player1.name().equals(player.name())) {//checking if player 1 or 2
@@ -261,8 +163,6 @@ public class Board {
         }
         return new ArrayList<>();// if not returns an empty list
     }
-
-
 
     public int getRoundedX(int x){
         if(x < 25){
@@ -367,5 +267,4 @@ public class Board {
         }
         return  y;
     }
-
 }

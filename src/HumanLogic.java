@@ -10,7 +10,6 @@ public class HumanLogic {
         this.y = (int)p.getY();
     }
 
-
     public Point getPoint(){
         x = board.getRoundedX(x);
         y = board.getRoundedY(y);

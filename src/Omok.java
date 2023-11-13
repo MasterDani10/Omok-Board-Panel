@@ -210,9 +210,6 @@ public class Omok {
 
                     p1 = !p1;
                 }
-
-
-
                 else {
                     Player playerCom;
                     String msg1 = "", msg2 = "";
